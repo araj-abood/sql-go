@@ -11,3 +11,10 @@ RETURNING *;
 
 SELECT *
 FROM feeds;
+
+
+-- name: GetFeedByUr :one
+
+SELECT * 
+FROM feeds 
+WHERE url=$1;
