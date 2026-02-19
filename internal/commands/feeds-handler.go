@@ -15,8 +15,8 @@ func FeedsHandler(s *config.State, command config.Command) error {
 	}
 
 	for _, f := range feeds {
-		fmt.Printf("name:= %s\n", f.Name)
-		fmt.Printf("url:= %s\n", f.Url)
+		fmt.Printf("name:= %s\n", f.Name.String)
+		fmt.Printf("url:= %s\n", f.Url.String)
 		userThatCreatedFeed, err := s.Db.GetUseById(context.Background(), f.UserID.UUID)
 
 		if err != nil {

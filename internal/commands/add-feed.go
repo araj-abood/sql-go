@@ -36,7 +36,7 @@ func AddFeedHandler(s *config.State, command config.Command) error {
 		return err
 	}
 
-	fmt.Printf("feed_name: %s\nc", feed.Name)
+	fmt.Printf("feed_name: %s\nc", feed.Name.String)
 
 	return nil
 }
