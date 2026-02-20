@@ -8,11 +8,10 @@ import (
 
 	"araj.com/ar/internal/config"
 	"araj.com/ar/internal/database"
-	"araj.com/ar/internal/helper"
 	"github.com/google/uuid"
 )
 
-func FollowHandler(s *config.State, command config.Command) error {
+func FollowHandler(s *config.State, command config.Command, user database.User) error {
 
 	if command.IsArgsEmpty(0) {
 		return fmt.Errorf("Please enter the feed url")
@@ -24,12 +23,6 @@ func FollowHandler(s *config.State, command config.Command) error {
 
 	if err != nil {
 		return fmt.Errorf("Could not find feed")
-	}
-
-	user, err := helper.GetCurrentUserFromDb(s)
-
-	if err != nil {
-		return err
 	}
 
 	_, err = s.Db.CreateFeedFollow(context.Background(), database.CreateFeedFollowParams{

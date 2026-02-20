@@ -46,8 +46,8 @@ func main() {
 	cmds.Register("agg", commands.AggHandler)
 	cmds.Register("addfeed", middleware.MiddlewareLoggedIn(commands.AddFeedHandler))
 	cmds.Register("feeds", commands.FeedsHandler)
-	cmds.Register("follow", commands.FollowHandler)
-	cmds.Register("following", commands.FollowingHandler)
+	cmds.Register("follow", middleware.MiddlewareLoggedIn(commands.FollowHandler))
+	cmds.Register("following", middleware.MiddlewareLoggedIn(commands.FollowingHandler))
 
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: cli <command> [args...]")
