@@ -16,6 +16,10 @@ func FollowingHandler(s *config.State, command config.Command) error {
 
 	feedsFollowed, err := s.Db.GetFeedsThatUserFollows(context.Background(), user.ID)
 
+	if err != nil {
+		return err
+	}
+
 	for _, feed := range feedsFollowed {
 		fmt.Printf("feed name %s", feed.FeedName.String)
 	}
