@@ -10,7 +10,7 @@ type isArgsEmptyInterface interface {
 }
 
 func (c Command) IsArgsEmpty(moreThan int) bool {
-	if len(c.Arguments) > moreThan {
+	if len(c.Arguments) < moreThan {
 		return true
 	}
 	return false
