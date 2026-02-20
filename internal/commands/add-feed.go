@@ -32,6 +32,14 @@ func AddFeedHandler(s *config.State, command config.Command) error {
 		UserID:    uuid.NullUUID{UUID: user.ID, Valid: true},
 	})
 
+	s.Db.CreateFeedFollow(context.Background(), database.CreateFeedFollowParams{
+		ID:        uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		UserID:    user.ID,
+		FeedID:    feed.ID,
+	})
+
 	if err != nil {
 		return err
 	}
