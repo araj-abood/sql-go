@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"araj.com/ar/internal/commands"
+	authenticatedcommands "araj.com/ar/internal/commands/authenticated-commands"
 	"araj.com/ar/internal/config"
 	"araj.com/ar/internal/database"
 	"araj.com/ar/internal/middleware"
@@ -44,11 +45,11 @@ func main() {
 	cmds.Register("reset", commands.ResetHandler)
 	cmds.Register("users", commands.UsersHandler)
 	cmds.Register("agg", commands.AggHandler)
-	cmds.Register("addfeed", middleware.MiddlewareLoggedIn(commands.AddFeedHandler))
+	cmds.Register("addfeed", middleware.MiddlewareLoggedIn(authenticatedcommands.AddFeedHandler))
 	cmds.Register("feeds", commands.FeedsHandler)
 	cmds.Register("follow", middleware.MiddlewareLoggedIn(commands.FollowHandler))
 	cmds.Register("following", middleware.MiddlewareLoggedIn(commands.FollowingHandler))
-
+	cmds.Register("unfollow", middleware.MiddlewareLoggedIn(authenticatedcommands.UnfollowHandler))
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: cli <command> [args...]")
 	}
