@@ -12,15 +12,9 @@ import (
 	"github.com/google/uuid"
 )
 
-func AddFeedHandler(s *config.State, command config.Command) error {
+func AddFeedHandler(s *config.State, command config.Command, user database.User) error {
 	if command.IsArgsEmpty(2) {
 		return errors.New("Expecting name and url arguments please supply them")
-	}
-
-	user, err := s.Db.GetUser(context.Background(), s.Cfg.CurrentUserName)
-
-	if err != nil {
-		return err
 	}
 
 	feed, err := s.Db.CreateFeed(context.Background(), database.CreateFeedParams{

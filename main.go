@@ -8,6 +8,7 @@ import (
 	"araj.com/ar/internal/commands"
 	"araj.com/ar/internal/config"
 	"araj.com/ar/internal/database"
+	"araj.com/ar/internal/middleware"
 	_ "github.com/lib/pq"
 )
 
@@ -43,7 +44,7 @@ func main() {
 	cmds.Register("reset", commands.ResetHandler)
 	cmds.Register("users", commands.UsersHandler)
 	cmds.Register("agg", commands.AggHandler)
-	cmds.Register("addfeed", commands.AddFeedHandler)
+	cmds.Register("addfeed", middleware.MiddlewareLoggedIn(commands.AddFeedHandler))
 	cmds.Register("feeds", commands.FeedsHandler)
 	cmds.Register("follow", commands.FollowHandler)
 	cmds.Register("following", commands.FollowingHandler)
